@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH << File.expand_path(File.join('..', 'lib'), File.dirname(__FILE__))
+
+require 'pingity'
+require 'optparse'
+
+op = OptionParser.new
+op.on('-v', '--version') do
+  puts "pingity Version #{Pingity.version} (API Version #{Pingity.api_version})"
+  exit(0)
+end
+
+args = op.parse(ARGV)
+
+command = args.shift
+
+case (command)
+when 'show'
+when 'push'
+  Pingity.push(*args)
+end
