@@ -5,18 +5,55 @@ $LOAD_PATH << File.expand_path(File.join('..', 'lib'), File.dirname(__FILE__))
 require 'pingity'
 require 'optparse'
 
+# == Constants ==============================================================
+
+BANNER = "pingity Version #{Pingity.version} (API Version #{Pingity.api_version})".freeze
+
+# == Support Methods ========================================================
+
+def show_help
+  puts BANNER
+end
+
+# == Main ===================================================================
+ 
+options = {
+  :verbose => false
+}
+ 
 op = OptionParser.new
+op.on('-d', '--verbose') do
+  options[:verbose] = true
+end
 op.on('-v', '--version') do
-  puts "pingity Version #{Pingity.version} (API Version #{Pingity.api_version})"
+  puts BANNER
   exit(0)
 end
 
 args = op.parse(ARGV)
 
+Pingity.config(options)
+
 command = args.shift
 
 case (command)
-when 'show'
-when 'push'
-  Pingity.push(*args)
+when nil
+  show_help
+else
+  method = command.to_sym
+  
+  if (Pingity.api_method?(method))
+    begin
+      response = Pingity.send(method, *args)
+      
+      if (response)
+        if (response['response_message'])
+          puts "Result: [#{response['response_code']}] #{response['response_message']}"
+        end
+      end
+      
+    rescue Pingity::Exceptions::GeneralException => e
+      puts "Error: #{e.to_s}"
+    end
+  end
 end
