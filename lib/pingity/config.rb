@@ -45,14 +45,16 @@ class Pingity::Config
   end
   
   def transport
-    require 'net/http'
-    
     :net_http
   end
   
   DEFAULT_OPTIONS.keys.each do |name|
     define_method(name) do
       @options[name]
+    end
+
+    define_method(:"#{name}=") do |value|
+      @options[name] = value
     end
   end
 end

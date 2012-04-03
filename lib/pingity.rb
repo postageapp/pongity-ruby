@@ -21,6 +21,13 @@ module Pingity
     @config = nil if (options)
     
     @config ||= Pingity::Config.new(options)
+    
+    yield(@config) if (block_given?)
+    
+    @config
+  end
+  class << self
+    alias_method :configure, :config
   end
   
   def self.configured?
