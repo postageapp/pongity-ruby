@@ -9,9 +9,10 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Scott Tadman"]
-  s.date = "2012-03-12"
+  s.date = "2012-04-03"
   s.description = "A Ruby module for interfacing with Pingity"
   s.email = "scott@twg.ca"
+  s.executables = ["pingity"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -19,15 +20,24 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
-    "test/helper.rb"
+    "VERSION",
+    "bin/pingity",
+    "lib/pingity.rb",
+    "lib/pingity/api_methods.rb",
+    "lib/pingity/config.rb",
+    "lib/pingity/exceptions.rb",
+    "pingity.gemspec",
+    "test/helper.rb",
+    "test/test_pingity.rb"
   ]
   s.homepage = "http://github.com/twg/pingity-ruby"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.11"
+  s.rubygems_version = "1.8.17"
   s.summary = "Ruby Library for Pingity"
 
   if s.respond_to? :specification_version then

@@ -1,6 +1,8 @@
 # rcov generated
 coverage
 
+*.gem
+
 # rdoc generated
 rdoc
 
